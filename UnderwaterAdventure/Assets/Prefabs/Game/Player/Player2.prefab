@@ -96,6 +96,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInformation:
+    _health: 20
+    _maxHealth: 20
     _name: Alex
     _color: {r: 0.22352943, g: 1, b: 0, a: 1}
-    _spriteRenderer: {fileID: 3213002683895022989}
+    _spriteRenderer: {fileID: 0}

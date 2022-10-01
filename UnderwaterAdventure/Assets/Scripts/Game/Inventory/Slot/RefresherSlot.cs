@@ -14,9 +14,6 @@ public class RefresherSlot : MonoBehaviour
        Item additonalItem = coupleOfSlots.firstSlot.Item;
        coupleOfSlots.firstSlot.AddItem(coupleOfSlots.secondSlot.Item);
        coupleOfSlots.secondSlot.AddItem(additonalItem);
-       //Vector2 position = additionalSlot.transform.position;
-       //coupleOfSlots.firstSlot.Replace(coupleOfSlots.secondSlot.transform.position);
-      // coupleOfSlots.secondSlot.Replace(position);
     }
     private void OnDisable() 
     {

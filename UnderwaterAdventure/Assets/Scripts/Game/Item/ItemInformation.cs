@@ -9,16 +9,25 @@ public class ItemInformation : MonoBehaviour
     private List<Slot> _currentSlots = new List<Slot>();
     private Slot _slot;
     private GameExit _gameExit;
+    private Item _currentItem;
+
+    public Item CurrentItem => _currentItem;
+
     private void Start() 
     {
         _gameExit = FindObjectOfType<GameExit>();
-        _slotCreator.OnCreate += SubscribeSlots;
+        _itemShower.Disappear();
+      //  _slotCreator.OnCreate += SubscribeSlots;
     }
-    private void SubscribeSlots(List<Slot> slots)
+    public void SubscribeSlot(Slot slot)
     {
-        _currentSlots = slots;
-        _currentSlots.ForEach(e=> e.OnClick += SelectSlot);
+        slot.OnClick += SelectSlot;
     }
+    public void DissubscribeSlot(Slot slot)
+    {
+        slot.OnClick -= SelectSlot;
+    }
+    public void Disactive()=> _itemShower.Disappear();
     private void SelectSlot(Slot slot)
     {
         Debug.Log($"{slot} + CLICK!");
@@ -30,13 +39,18 @@ public class ItemInformation : MonoBehaviour
     }
     public void SetItem(Item item)
     {
+        if (_gameExit == null)
+        {
+          _gameExit = FindObjectOfType<GameExit>();
+        }
         _gameExit.SetCurrentAction(_itemShower.Disappear);
         _itemShower.Appear();
         _itemShower.SetItem(item);
+        _currentItem = item;
     }
     private void OnDisable() 
     {
-     _slotCreator.OnCreate -= SubscribeSlots;
-    _currentSlots.ForEach(e=> e.OnClick -= SelectSlot);
+     //_slotCreator.OnCreate -= SubscribeSlots;
+   // _currentSlots.ForEach(e=> e.OnClick -= SelectSlot);
     }
 }

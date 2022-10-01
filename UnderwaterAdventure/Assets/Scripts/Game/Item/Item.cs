@@ -7,7 +7,11 @@ public class Item : ScriptableObject
   [SerializeField] private Sprite _sprite;
   [SerializeField] private string _name;
   [SerializeField] private string[] _descriptions;
+  [SerializeField] private string[] _battleDescriptions;
+  [SerializeField] private List< ItemAbility> _itemAbilities;
    public Sprite Sprite { get => _sprite; private set => _sprite = value; }
    public string Name { get => _name; private set => _name = value; }
-    public string[] Descriptions { get => _descriptions; set => _descriptions = value; }
+  public string[] Descriptions { get => _descriptions; set => _descriptions = value; }
+  public string[] BattleDescriptions { get => _battleDescriptions; set => _battleDescriptions = value; }
+    public List<ItemAbility> ItemAbilities { get => _itemAbilities; set => _itemAbilities = value; }
 }

@@ -1,9 +1,8 @@
+using System.Linq;
 using System.Collections;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Threading;
-using System.Threading.Tasks;
 using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
@@ -12,12 +11,20 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUp
     private Item _item;
     private bool _isItemTaken;
     private bool _isCursorOnSlot;
+    public bool CanDrag { get; set; } = true;
     public Item Item { get => _item; set => _item = value; }
     public event Action<Slot> OnDragItem; 
     public event Action<Slot> OnClick;
+    private void Start()
+    {
+      if (Item.Name != "")
+      {
+        _item.ItemAbilities.ToList().ForEach(e=>e.SetStartCountForReloading());
+      }   
+    }
     public void AddItem(Item item)
     {
-        SetCurrentItem(item,item.Sprite);
+        SetCurrentItem(item);
     }
 
     public Sprite ReturnItemSprite()
@@ -26,21 +33,30 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUp
     }
     public void RemoveItem()
     {
-        SetCurrentItem(null,null);
+        SetCurrentItem(null);
     }
-    private void SetCurrentItem(Item item, Sprite sprite)
+    private void SetCurrentItem(Item item)
     {
         Item = item;
-        Action OnSetSpite = sprite != null ? (Action) SetSprite : (Action) TurnOffSprite;
+        Action OnHasItem = _item != null ?  (Action)CheckSprite :  (Action)TurnOffSprite;
+        OnHasItem.Invoke();
+        void CheckSprite()
+        {
+        Action OnSetSpite = Item.Sprite != null ? (Action) SetSprite : (Action) TurnOffSprite;
         OnSetSpite.Invoke();
+        }
     }
     private void SetSprite()
     {
-        if (_icon.isActiveAndEnabled == false)
+         TurnOnSprite();
+        _icon.sprite = Item.Sprite;
+    }
+    private void TurnOnSprite()
+    {
+         if (_icon.isActiveAndEnabled == false)
         {
         _icon.gameObject.SetActive(true);
         }
-        _icon.sprite = Item.Sprite;
     }
     private void TurnOffSprite()
     {
@@ -70,7 +86,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUp
 
     public void OnDrag(PointerEventData eventData)
     {
-        if (_isItemTaken == false && _item.Sprite != null)
+        if (_isItemTaken == false && _item.Sprite != null && CanDrag)
         {
             _isItemTaken = true;
             OnDragItem?.Invoke(this);

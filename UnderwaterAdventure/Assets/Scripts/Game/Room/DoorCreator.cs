@@ -8,6 +8,9 @@ public class DoorCreator : MonoBehaviour
     [SerializeField] private int _countOfDoors = 10;
     [SerializeField] private RectTransform _doorPosition;
     private List<Door> _doors = new List<Door>();
+
+    public List<Door> Doors { get => _doors; private set => _doors = value; }
+
     public event Action OnRemoveDoor;
     private void Start() 
     {
@@ -15,6 +18,11 @@ public class DoorCreator : MonoBehaviour
     }
     private void CreateAllDoors()
     {
+        SavablePassedDoors savableDoors = Loader<SavablePassedDoors>.Load(new SavablePassedDoors());
+        if (savableDoors != null)
+        {
+            _countOfDoors -= savableDoors.NamesOfDoors.Count;
+        }
         for (int i = 0; i < _countOfDoors; i++)
         {
            CreateDoor(_doorPosition);
@@ -26,21 +34,21 @@ public class DoorCreator : MonoBehaviour
         door.transform.SetParent(point);
         door.SetListener(CloseAllDoors);
         door.OnOpenDoor += RemoveDoor;
-        _doors.Add(door);
+        Doors.Add(door);
         return door;
     }
     private void RemoveDoor(Door door)
     {
         door.RemoveAllListeners();
         OnRemoveDoor?.Invoke();
-        _doors.Remove(door);
+        Doors.Remove(door);
     }
     private void CloseAllDoors()
     {
-        _doors.ForEach(e=>e.CloseDoor());
+        Doors.ForEach(e=>e.CloseDoor());
     }
     public void OpenAllDoors()
     {
-          _doors.ForEach(e=>e.gameObject.SetActive(true));
+          Doors.ForEach(e=>e.gameObject.SetActive(true));
     }
 }

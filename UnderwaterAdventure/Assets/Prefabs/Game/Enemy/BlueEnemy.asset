@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: BlueEnemy
   m_EditorClassIdentifier: 
   _name: BlueEnemy
+  _health: 13
+  _maxHealth: 15
   _color: {r: 0, g: 0.21498632, b: 1, a: 1}
+  _enemyAttack: {fileID: 11400000, guid: 16aac5633b3faa649b688cf576501931, type: 2}

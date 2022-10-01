@@ -1,9 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public static class Extensions 
 {
+    public static void DivideImageBar(this Image image, float biggerValue, float smallerValue)
+    {
+     float fillValue = (float)smallerValue;
+     fillValue /= biggerValue;
+    image.fillAmount = fillValue;
+    }
     public static void ChangeStateOfCanvasGroup(this CanvasGroup canvasGroup, bool isTunrOn)
     {
         canvasGroup.blocksRaycasts = isTunrOn;

@@ -6,7 +6,7 @@ public class CheckerItemHand : MonoBehaviour
 {
     [SerializeField] private ItemHand _itemHand;
     [SerializeField] private SlotMouseButtonHandler _slotMouseButtonHandler;
-    private void Start() 
+    private void Awake() 
     {
         _slotMouseButtonHandler.OnGetLeftMouseButtonUp += _itemHand.SetSlots;
         _slotMouseButtonHandler.OnGetRightMouseButtonDown += _itemHand.Disappear;

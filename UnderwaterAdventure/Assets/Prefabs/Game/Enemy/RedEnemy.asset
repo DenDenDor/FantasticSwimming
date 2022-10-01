@@ -13,4 +13,7 @@ MonoBehaviour:
   m_Name: RedEnemy
   m_EditorClassIdentifier: 
   _name: RedEnemy
+  _health: -33
+  _maxHealth: 20
   _color: {r: 1, g: 0, b: 0, a: 1}
+  _enemyAttack: {fileID: 11400000, guid: b20fd6f1484f1f84298d3a4072e28aad, type: 2}

@@ -37,7 +37,7 @@ public class CharacterSelecterScreen : Screen
     {
         _text.text = _startDescription;
         CancelButton.ChangeEvent(() => _menuScreen.TurnOn());
-        Saver<SavableSelectedCharacter>.Save(new SavableSelectedCharacter(""));
+        StarterNewGame.StartNewGame();
         _continieGameButton.gameObject.SetActive(false);
     }
     private void OnDisable() 
