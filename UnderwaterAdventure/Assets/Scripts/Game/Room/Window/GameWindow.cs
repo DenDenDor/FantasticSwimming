@@ -1,18 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
+using System;
 
-public class GameWindow : MonoBehaviour
+public abstract class GameWindow : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+   protected Action OnDestroy;
+   public AdditionalSlotCreator FindAdditionalSlotCreatorOnScene<T>() where T : GameWindow
+   {
+     AdditionalSlotCreator additionalSlotCreator = FindObjectsOfType<AdditionalSlotCreator>().FirstOrDefault(e=>e.GameWindow is T);
+     OnDestroy +=  additionalSlotCreator.DestroyCreatedSlots;
+     return additionalSlotCreator;
+   }
 }

@@ -13,15 +13,20 @@ public class BattleWindow : GameWindow
     [SerializeField] private Button _button;
     [SerializeField] private List<Enemy> _enemies;
     private Enemy _currentEnemy;
-    private WinWindow _winWindow;
+    [SerializeField] private WinWindow _winWindow;
     private ActiveOfMainSlots _activeOfMainSlots;
+    private AdditionalSlotCreator _additionalSlotCreator;
+    public AdditionalSlotCreator AdditionalSlotCreator => _additionalSlotCreator;
     public event Action<Enemy> OnSetEnemy;
+    private void Awake() 
+    {
+        _additionalSlotCreator = FindAdditionalSlotCreatorOnScene<BattleWindow>();
+    }
     private void Start() 
     {
         _activeOfMainSlots = FindObjectOfType<ActiveOfMainSlots>();
-        _winWindow = FindObjectOfType<WinWindow>();
         _activeOfMainSlots.TurnOff();
-        _currentEnemy = _enemies[Random.Range(0,_enemies.Count)];
+        _currentEnemy = _enemies.GetRandomElementOfList();
         _icon.color = _currentEnemy.Color;
         _nameOfEnemy.text = _currentEnemy.Name;
         _button.onClick.AddListener(OnClick);
@@ -34,10 +39,14 @@ public class BattleWindow : GameWindow
     }
     public void OnClick()
     {
-        _activeOfMainSlots.TurnOn();
-        _winWindow.TurnOn(_currentEnemy);
+        WinWindow winWindow = Instantiate(_winWindow,Vector3.zero, Quaternion.identity);
+        winWindow.transform.SetParent(FindObjectOfType<DoorCreator>().DoorPosition.transform);
+        winWindow.TurnOn(_currentEnemy,_activeOfMainSlots.TurnOn);
         Destroy(gameObject);
     }
-    
+    private void OnDisable()
+    {
+        OnDestroy?.Invoke();
+    }
 
 }

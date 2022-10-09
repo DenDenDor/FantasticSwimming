@@ -6,7 +6,7 @@ using UnityEngine;
 public class SlotMouseButtonHandler : MonoBehaviour
 {
     public event Action OnActionBeforeRefreshingSlots;
-    public event Action OnGetLeftMouseButtonUp;
+    public Action OnGetLeftMouseButtonUp;
     public event Action OnGetRightMouseButtonDown;
     private void Update() 
     {

@@ -1,32 +1,64 @@
+using System.Runtime.CompilerServices;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
-public class AdditionalSlotCreator : MonoBehaviour
+public class AdditionalSlotCreator : Creator<Slot>
 {
   [SerializeField] private SlotCreator _slotCreator;
   [SerializeField] private Transform _slotPoint;
-  [SerializeField] private SaverSlots _saverSlots;
+  [SerializeField] private GameWindow _gameWindow;
   private List<Item> _currentItems = new List<Item>(); 
   private Slot _slot;
-  public void CreateAdditionalSlot(Item item)
+  private List<Slot> _currentSlots = new List<Slot>();
+  public List<Slot> CurrentSlots => _currentSlots;
+  public GameWindow GameWindow => _gameWindow;
+  public IEnumerable<Slot> CreateNewSlots(List<string> namesOfItems, Action<Slot> OnClick)
   {
-    _currentItems = _slotCreator.Slots.Select(e=>e.Item).ToList();
-    _slot = _slotCreator.Create(_slotPoint,item);
-    _slotCreator.OnCreate?.Invoke(_slotCreator.Slots);
+    foreach (var slot in RecreateMainSlots(namesOfItems))
+    {
+       SubscribeSlot(slot, OnClick);
+       yield return slot;
+    }
   }
-  public void ReturnSlots()
+  public void SubscribeSlot(Slot slot,Action<Slot> OnClick)
   {
-   List<Item> items = _slotCreator.Slots.Select(e=>e.Item).Except(_currentItems).ToList();
-   Debug.Log(items[0].Name);
-    Slot slot = _slotCreator.Slots.Find(e=>e.Item == items[0]);
+    if(slot.Item.Name != "")
+    {
+    slot.OnClick += OnClick;
+    }
+  }
+  public IEnumerable<Slot> RecreateMainSlots(List<string> namesOfItems)
+  {
+    foreach (var item in namesOfItems)
+    {
+    yield return CreateSlot(_slotCreator.Items.Find(e=>e.Name == item), _slotPoint);
+    }
+  }
+  public Slot CreateSlot(Item item, Transform point)
+  {
+    Slot slot =  Create(point.position);
+    slot.AddItem(item); 
+    _currentSlots.Add(slot);
+    slot.transform.SetParent(point);
+    slot.CanDrag = false;
+    return slot;
+  }
+  public void DestroyCreatedSlots()
+  {
+    List<Slot> slots = new List<Slot>();
+    slots.AddRange(_currentSlots);
+    for (int i = 0; i < slots.Count; i++)
+    {
+      RemoveSlot(slots[i]);
+    }
+    _currentSlots.Clear();
+  }
+  private void RemoveSlot(Slot slot)
+  {
     _slotCreator.RemoveSlot(slot);
     Destroy(slot.gameObject);
-  }
-  public void DestroyLastSlot()
-  {
-    _slotCreator.RemoveSlot(_slot);
-    Destroy(_slot.gameObject);
   }
 }

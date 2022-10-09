@@ -10,6 +10,7 @@ public class DoorCreator : MonoBehaviour
     private List<Door> _doors = new List<Door>();
 
     public List<Door> Doors { get => _doors; private set => _doors = value; }
+    public RectTransform DoorPosition=> _doorPosition;
 
     public event Action OnRemoveDoor;
     private void Start() 
@@ -25,7 +26,7 @@ public class DoorCreator : MonoBehaviour
         }
         for (int i = 0; i < _countOfDoors; i++)
         {
-           CreateDoor(_doorPosition);
+           CreateDoor(DoorPosition);
         }
     }
     private Door CreateDoor(Transform point)

@@ -9,7 +9,7 @@ public class RefresherSlot : MonoBehaviour
     {
       _slotCollector.OnRefresh +=  Refresh;
     }
-    private void Refresh((Slot firstSlot, Slot secondSlot) coupleOfSlots)
+    public void Refresh((Slot firstSlot, Slot secondSlot) coupleOfSlots)
     {
        Item additonalItem = coupleOfSlots.firstSlot.Item;
        coupleOfSlots.firstSlot.AddItem(coupleOfSlots.secondSlot.Item);

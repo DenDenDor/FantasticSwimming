@@ -16,6 +16,7 @@ public class PlayerHealthOutPut : MonoBehaviour
     {
         _playerHealth = player.PlayerHealth;
         _playerHealth.OnChangeHealth += ShowHealth;
+        ShowHealth();
     }
     public void ShowHealth()
    {

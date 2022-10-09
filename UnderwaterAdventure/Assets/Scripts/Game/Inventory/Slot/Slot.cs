@@ -8,6 +8,7 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUp
 {
     [SerializeField] private Sprite _questionSprite;
     [SerializeField] private Image _icon;
+    [SerializeField] private Image _panel;
     private Item _item;
     private bool _isItemTaken;
     private bool _isCursorOnSlot;
@@ -21,6 +22,14 @@ public class Slot : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUp
       {
         _item.ItemAbilities.ToList().ForEach(e=>e.SetStartCountForReloading());
       }   
+    }
+    public void TurnOnLight()
+    {
+        _panel.gameObject.SetActive(true);
+    }
+    public void TurnOffLight()
+    {
+        _panel.gameObject.SetActive(false);
     }
     public void AddItem(Item item)
     {

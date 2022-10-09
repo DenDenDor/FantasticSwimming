@@ -18,9 +18,6 @@ MonoBehaviour:
   - "\u041A\u0430\u043C\u0435\u043D\u044C"
   - "\u0422\u043E\u043F"
   - "\u041F\u0443\u0445"
-  _battleDescriptions:
-  - "1 \u041A\u0430\u043C\u0435\u043D\u044C"
-  - "2 \u041A\u0430\u043C\u0435\u043D\u044C"
-  - "3 \u041A\u0430\u043C\u0435\u043D\u044C"
+  _treasureDescription: T StonE
   _itemAbilities:
   - {fileID: 11400000, guid: 30babd75be9937143bef5132815bf902, type: 2}

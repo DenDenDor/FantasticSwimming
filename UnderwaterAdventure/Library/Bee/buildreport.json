@@ -1,0 +1,20 @@
+{
+"instructions_readme": "1) Open Chrome, 2) go to chrome://tracing, 3) click Load, 4) navigate to this file.",
+
+"traceEvents":[
+{ "pid": "Unity", "ph":"M", "name": "process_name", "args": {"name": "Unity"} },
+{ "pid": "Unity", "ph":"M", "name": "process_sort_index", "args": {"sort_index": -100} },
+{ "pid": "Unity", "tid": 1, "ph":"M", "name": "thread_name", "args": {"name": ""} },
+{ "pid": "Unity", "tid": 1,"ts": 1.6653510745952E+15,"dur": 14931114, "ph":"X", "name": "Build player"},
+{ "pid": "Unity", "tid": 1,"ts": 1.66535107464455E+15,"dur": 572594, "ph":"X", "name": "Preprocess Player"},
+{ "pid": "Unity", "tid": 1,"ts": 1.66535107523472E+15,"dur": 14178071, "ph":"X", "name": "Prepare For Build"},
+{}
+
+],
+"meta_datetime": "10/10/2022 00:31:29",
+"meta_command_line": "C:\\unityeditorfolder\\2021.3.11f1\\Editor\\Unity.exe -projectpath C:/UnityProjects/UnderwaterAdventure -useHub -hubIPC -cloudEnvironment production -hubSessionId f6fa5e00-47fb-11ed-bfc1-db7b518544eb",
+"meta_command_line_args": "C:\\unityeditorfolder\\2021.3.11f1\\Editor\\Unity.exe -projectpath C:/UnityProjects/UnderwaterAdventure -useHub -hubIPC -cloudEnvironment production -hubSessionId f6fa5e00-47fb-11ed-bfc1-db7b518544eb",
+"meta_user_name": "\u0415\u043b\u0435\u043d\u0430",
+"meta_os_version": "Microsoft Windows NT 10.0.17763.0",
+"meta_cpu_count": "4"
+}

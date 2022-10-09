@@ -21,7 +21,7 @@ public class EnemyHealth : MonoBehaviour
    {
     _currentEnemy.Health -= damage;
     OnApplyDamage?.Invoke();
-    if (_currentEnemy.Health < 0)
+    if (_currentEnemy.Health <= 0)
     {
       _battleWindow.EndBattle();
     }

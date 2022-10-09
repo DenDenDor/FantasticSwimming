@@ -54,11 +54,16 @@ public class ItemWindowCreator : MonoBehaviour
    }
    private void CreateItemInformation(Slot slot)
    {
-    Debug.Log("YEH!");
+    if(_listOfItemInformation.Select(e=>e.CurrentItem).Contains(slot.Item))
+    {
+        return;
+    }
+    
     ItemInformation itemInformation = Instantiate(_itemInformation, _additionalSlot.transform.position,Quaternion.identity);
     itemInformation.SetItem(slot.Item);
     _listOfItemInformation.Add(itemInformation);
     itemInformation.transform.SetParent(_additionalSlot);
+    
    }
    private void OnDisable() 
    {

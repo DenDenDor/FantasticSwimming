@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.Linq;
-using Random=UnityEngine.Random;
 public class SlotCreator : Creator<Slot> 
 {
    [SerializeField] private int _countOfSlots = 8;
@@ -40,7 +39,7 @@ public class SlotCreator : Creator<Slot>
             List<Item> allLeftItems = _items.FindAll(e=>e.Name != "");
             for (int i = 0; i < _countOfSlots; i++)
             {
-                Item currentItem = _countOfFilledSlots <= i ? _items.Find(e=>e.Name == "") : allLeftItems[Random.Range(0,allLeftItems.Count)];
+                Item currentItem = _countOfFilledSlots <= i ? _items.Find(e=>e.Name == "") : allLeftItems.GetRandomElementOfList();
                  Create(_slotPosition,currentItem);
                  if (allLeftItems.Count > 0 && _countOfSlots >= i)
                  {
@@ -61,16 +60,5 @@ public class SlotCreator : Creator<Slot>
     {
          Slots.Remove(slot);
          OnCreate?.Invoke(Slots);
-    }
-    public void CreateTreasureSlot(Item item)
-    {
-       _treasureSlot = Create(_additionalPosition, item);
-        OnCreate?.Invoke(Slots);
-    }
-    public void DestroyTreasureSlot()
-    {
-        Slots.Remove(_treasureSlot);
-        Destroy(_treasureSlot.gameObject);
-        OnCreate?.Invoke(Slots);
     }
 }

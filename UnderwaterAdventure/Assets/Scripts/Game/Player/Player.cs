@@ -13,9 +13,9 @@ public class Player : MonoBehaviour
     public void SetColor()
     {
         PlayerInformation.SpriteRenderer = GetComponent<SpriteRenderer>();
-        PlayerInformation.Health = PlayerInformation.MaxHealth;
         PlayerInformation.SpriteRenderer.color = PlayerInformation.Color;
         PlayerHealth = GetComponent<PlayerHealth>();
         PlayerHealth.PlayerInformation = PlayerInformation;
+        PlayerHealth.SetStartHealth();
     }
 }
