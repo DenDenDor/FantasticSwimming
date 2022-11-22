@@ -96,6 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInformation:
+    _health: 6
+    _armorPoints: 3
+    _maxArmorPoints: 3
+    _maxHealth: 20
     _name: Bob
     _color: {r: 1, g: 0, b: 0.1133728, a: 1}
-    _spriteRenderer: {fileID: 7966138243907264586}
+    _spriteRenderer: {fileID: 0}

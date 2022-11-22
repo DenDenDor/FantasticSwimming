@@ -96,6 +96,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInformation:
+    _health: 20
+    _armorPoints: 3
+    _maxArmorPoints: 3
+    _maxHealth: 20
     _name: Michel
     _color: {r: 0, g: 0.054534435, b: 1, a: 1}
     _spriteRenderer: {fileID: 8899231026149587307}

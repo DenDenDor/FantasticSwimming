@@ -6,6 +6,7 @@ public class EnemyHealth : MonoBehaviour
 {
    [SerializeField] private BattleWindow _battleWindow;
    private Enemy _currentEnemy;
+   private List<EnemyEffect> _listOfEnemyEffect;
    public event Action OnApplyDamage;
    public event Action OnDeath;
    private void Awake() 
@@ -20,6 +21,7 @@ public class EnemyHealth : MonoBehaviour
    public void ApplyDamage(int damage)
    {
     _currentEnemy.Health -= damage;
+    //_listOfEnemyEffect.ForEach(e=>e.);
     OnApplyDamage?.Invoke();
     if (_currentEnemy.Health <= 0)
     {

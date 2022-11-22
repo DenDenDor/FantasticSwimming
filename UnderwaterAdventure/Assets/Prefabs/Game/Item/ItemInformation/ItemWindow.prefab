@@ -698,6 +698,10 @@ MonoBehaviour:
   - {fileID: 3998163309366397845}
   - {fileID: 5757284383016275316}
   - {fileID: 5757284383313790436}
+  _buttons:
+  - {fileID: 646690883685318776}
+  - {fileID: 646690882861246279}
+  - {fileID: 646690884806118353}
 --- !u!1 &646690884806118354
 GameObject:
   m_ObjectHideFlags: 0

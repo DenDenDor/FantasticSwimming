@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ItemInformation : MonoBehaviour
 {
-    [SerializeField] private SlotCreator _slotCreator;
     [SerializeField] private ItemShower _itemShower;
     private List<Slot> _currentSlots = new List<Slot>();
     private Slot _slot;
@@ -44,8 +43,8 @@ public class ItemInformation : MonoBehaviour
           _gameExit = FindObjectOfType<GameExit>();
         }
         _gameExit.SetCurrentAction(_itemShower.Disappear);
-        _itemShower.Appear();
         _itemShower.SetItem(item);
+        _itemShower.Appear();
         _currentItem = item;
     }
     private void OnDisable() 

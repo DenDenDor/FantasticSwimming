@@ -9,23 +9,26 @@ public class ItemAbilityBar : MonoBehaviour
     [SerializeField] private Button _button;
     private ItemAbility _itemAbility;
     private NextMoveButton _nextMoveButton;
+    public ItemAbility ItemAbility { get => _itemAbility; private set => _itemAbility = value; }
+
     private void Awake() 
     {
      _nextMoveButton = FindObjectOfType<NextMoveButton>();
      _nextMoveButton.OnStartNextMove += ChangeIcon;
     }
-    private void ChangeIcon() => _bar.DivideImageBar(_itemAbility.CountForReloading, _itemAbility.CurrentCoolDown);
+    private void ChangeIcon() => _bar.DivideImageBar(ItemAbility.CountForReloading, ItemAbility.CurrentCoolDown);
     private void Start() 
    {
-        _text.text = _itemAbility.Description;
+        _text.text = ItemAbility.Description;
         _button.onClick.AddListener(UseAbility);
    }
    private void UseAbility()
    {
-      _itemAbility.UseAbility();
+        Debug.Log(" BOB! ");
+      ItemAbility.UseAbility();
       ChangeIcon();
    }
-   public void SetItemAbility(ItemAbility itemAbility) => _itemAbility = itemAbility;
+   public void SetItemAbility(ItemAbility itemAbility) => ItemAbility = itemAbility;
    private void OnDisable() 
    {
     _button.onClick.RemoveListener(UseAbility);

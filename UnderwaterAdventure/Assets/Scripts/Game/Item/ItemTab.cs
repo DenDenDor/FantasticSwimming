@@ -1,3 +1,4 @@
+using System.Linq;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +21,12 @@ public class ItemTab : MonoBehaviour
    }
    public void SetItem(Item item)
    {
-    _text.text = item.Descriptions[_index];
+      if (item.ItemAbilities.Count -1 < _index)
+      {
+         _text.text = item.ItemAbilities.Select(e=>e.FullDescription).LastOrDefault();
+         return;
+      }
+       _text.text = item.ItemAbilities[_index].FullDescription;
    }
    private void Click() 
    {

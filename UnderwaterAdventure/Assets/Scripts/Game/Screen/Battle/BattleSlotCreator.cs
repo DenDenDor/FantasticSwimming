@@ -9,13 +9,13 @@ public class BattleSlotCreator : MonoBehaviour
    [SerializeField] private BattleWindow _battleWindow;
    private List<Slot> _additionalSlots = new List<Slot>();
    private Slot _previousSlot;
-   private void Start() 
+   private void Awake() 
    {
     SavableInterface savableInterface = Loader<SavableInterface>.Load(new SavableInterface());
-     _battleWindow.AdditionalSlotCreator.CreateNewSlots(savableInterface.NamesOfItems,ClickOnSlot).ToList().ForEach(e=>_battleItemInformationCreator.CreateItemInformation(e));
-    ClickOnSlot(_battleWindow.AdditionalSlotCreator.CurrentSlots.FirstOrDefault(e=>e.Item.Name != ""));    
+    _battleWindow.AdditionalSlotCreator.CreateNewSlots(savableInterface.NamesOfItems,ClickOnSlot).ToList().ForEach(e=>_battleItemInformationCreator.CreateItemInformation(e));
+    ClickOnSlot(_battleWindow.AdditionalSlotCreator.CurrentSlots.FirstOrDefault(e=>e.Item.Name != ""));  
    }
-   public void IncreaseMovesOfSlots()
+    public void IncreaseMovesOfSlots()
    {
      _battleWindow.AdditionalSlotCreator.CurrentSlots.Select(e=>e.Item).Select(a=>a.ItemAbilities).ToList().ForEach(e=>e.ForEach(a=>a.IncreaseCoolDown()));
    }
